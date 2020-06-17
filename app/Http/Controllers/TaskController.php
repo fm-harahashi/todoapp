@@ -8,6 +8,6 @@ class TaskController extends Controller
 {
     public function index()
     {
-        return "first commit";
+        return "hello world";
     }
 }
