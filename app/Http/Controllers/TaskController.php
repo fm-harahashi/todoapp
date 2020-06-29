@@ -18,7 +18,7 @@ class TaskController extends Controller
 
         // 選ばれたフォルダに紐づくタスクを取得する
         $tasks = $current_folder->getTasksList()->get();
-        
+
         return view('tasks/index', [
             'folders' => $folders,
             'current_folder_id' => $current_folder->id,
