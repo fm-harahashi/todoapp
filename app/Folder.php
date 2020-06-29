@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Folder extends Model
 {
-    public function tasks()
+    public function getTasksList()
     {
         return $this->hasMany('App\Task');
     }
