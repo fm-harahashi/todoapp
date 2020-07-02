@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ToDo App</title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-<header>
-    <nav class="my-navbar">
-        <a class="my-navbar-brand" href="/">ToDo App</a>
-    </nav>
-</header>
-<main>
+@extends('layout')
+
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col col-md-offset-3 col-md-6">
@@ -22,11 +9,9 @@
                     <div class="panel-body">
                         @if($errors->any())
                             <div class="alert alert-danger">
-                                <ul>
-                                    @foreach($errors->all() as $message)
-                                        <li>{{ $message }}</li>
-                                    @endforeach
-                                </ul>
+                                @foreach($errors->all() as $message)
+                                    <p>{{ $message }}</p>
+                                @endforeach
                             </div>
                         @endif
                         <form action="{{ route('folders.create') }}" method="post">
@@ -44,6 +29,4 @@
             </div>
         </div>
     </div>
-</main>
-</body>
-</html>
+@endsection
