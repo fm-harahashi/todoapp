@@ -45,7 +45,7 @@ class TaskController extends Controller
         $task->title = $request->title;
         $task->due_date = $request->due_date;
 
-        $current_folder->tasks()->save($task);
+        $current_folder->getTasksList()->save($task);
 
         return redirect()->route('tasks.index', [
             'id' => $current_folder->id,
