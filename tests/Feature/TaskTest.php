@@ -15,7 +15,7 @@ class TaskTest extends TestCase
     /**
      * 各テストメソッドの実行前に呼ばれる
      */
-    public function setUp() :void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -53,5 +53,34 @@ class TaskTest extends TestCase
         $response->assertSessionHasErrors([
             'due_date' => '期限日 には今日以降の日付を入力してください。',
         ]);
+    }
+
+    /**
+     * 期限日が正常な場合
+     * @test
+     */
+    public function due_date_should_be_today()
+    {
+        $response = $this->post('/folders/1/tasks/create', [
+            'title' => 'Sample task',
+            'due_date' => Carbon::today()->format('Y/m/d'), // 正常なデータ
+        ]);
+
+        $response->assertStatus(302);
+    }
+
+    /**
+     * 期限日が閏年の場合
+     * 注意2048年以降にこのテストを行うとテストは通りません。おそらくその場合はありませんが。
+     * @test
+     */
+    public function due_date_should_be_uruudosi()
+    {
+        $response = $this->post('/folders/1/tasks/create', [
+            'title' => 'Sample task',
+            'due_date' => "2048/02/29", // 閏年のデータ
+        ]);
+
+        $response->assertStatus(302);
     }
 }
