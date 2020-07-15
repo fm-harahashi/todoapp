@@ -43,7 +43,7 @@ class TaskController extends Controller
 
         $task = new Task();
         $task->title = $request->title;
-        $task->due_date = $request->due_date;
+        $task->due_date = $request->due_date;   // string YYYYY/MM/DD 形
 
         $current_folder->getTasksList()->save($task);
 
