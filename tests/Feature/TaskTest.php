@@ -102,4 +102,21 @@ class TaskTest extends TestCase
             'status' => '状態 には 未着手、着手中、完了 のいずれかを指定してください。',
         ]);
     }
+
+    /**
+     * 状態が正常な場合
+     * @test
+     */
+    public function status_should_be_normal()
+    {
+        $this->seed('TasksTableSeeder');
+
+        $response = $this->post('/folders/1/tasks/1/edit', [
+            'title' => 'Sample task',
+            'due_date' => Carbon::today()->format('Y/m/d'),
+            'status' => 1,
+        ]);
+
+        $response->assertStatus(302);
+    }
 }
