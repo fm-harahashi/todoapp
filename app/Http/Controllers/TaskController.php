@@ -24,7 +24,7 @@ class TaskController extends Controller
         $folders = Auth::user()->folders()->get();
 
         // 選ばれたフォルダに紐づくタスクを取得する
-        $tasks = $folder->tasks()->get();
+        $tasks = $folder->getTasksList()->get();
 
         return view('tasks/index', [
             'folders' => $folders,
@@ -57,7 +57,7 @@ class TaskController extends Controller
         $task->title = $request->title;
         $task->due_date = $request->due_date;
 
-        $folder->tasks()->save($task);
+        $folder->getTasksList()->save($task);
 
         return redirect()->route('tasks.index', [
             'id' => $folder->id,
